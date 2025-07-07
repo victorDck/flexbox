@@ -1,395 +1,149 @@
-// Dados das perguntas
-const questionsData = {
-    matematica: [
-        {
-            question: "Qual é o resultado de 15 + 28?",
-            options: ["41", "43", "45", "47"],
-            correct: 1,
-            explanation: "15 + 28 = 43"
-        },
-        {
-            question: "Se um triângulo tem ângulos de 60°, 60° e 60°, ele é:",
-            options: ["Escaleno", "Isósceles", "Equilátero", "Retângulo"],
-            correct: 2,
-            explanation: "Um triângulo com todos os ângulos iguais a 60° é equilátero."
-        },
-        {
-            question: "Qual é a raiz quadrada de 144?",
-            options: ["10", "11", "12", "13"],
-            correct: 2,
-            explanation: "√144 = 12, pois 12 × 12 = 144"
-        },
-        {
-            question: "Se x + 5 = 12, qual é o valor de x?",
-            options: ["5", "6", "7", "8"],
-            correct: 2,
-            explanation: "x + 5 = 12, então x = 12 - 5 = 7"
-        },
-        {
-            question: "Qual é a área de um retângulo com base 8 e altura 6?",
-            options: ["42", "46", "48", "50"],
-            correct: 2,
-            explanation: "Área = base × altura = 8 × 6 = 48"
-        },
-        {
-            question: "Quanto é 25% de 200?",
-            options: ["25", "50", "75", "100"],
-            correct: 1,
-            explanation: "25% de 200 = 0,25 × 200 = 50"
-        },
-        {
-            question: "Qual é o perímetro de um quadrado com lado 7 cm?",
-            options: ["21 cm", "28 cm", "35 cm", "49 cm"],
-            correct: 1,
-            explanation: "Perímetro do quadrado = 4 × lado = 4 × 7 = 28 cm"
-        },
-        {
-            question: "Se 3x = 21, qual é o valor de x?",
-            options: ["6", "7", "8", "9"],
-            correct: 1,
-            explanation: "3x = 21, então x = 21 ÷ 3 = 7"
-        },
-        {
-            question: "Qual é o resultado de 8²?",
-            options: ["16", "32", "64", "128"],
-            correct: 2,
-            explanation: "8² = 8 × 8 = 64"
-        },
-        {
-            question: "Em uma fração 3/4, qual é o denominador?",
-            options: ["3", "4", "7", "12"],
-            correct: 1,
-            explanation: "Na fração 3/4, o denominador é 4 (número de baixo)."
-        }
-    ],
-    geografia: [
-        {
-            question: "Qual é a capital do Brasil?",
-            options: ["São Paulo", "Rio de Janeiro", "Brasília", "Salvador"],
-            correct: 2,
-            explanation: "Brasília é a capital federal do Brasil desde 1960."
-        },
-        {
-            question: "Qual é o maior país do mundo em extensão territorial?",
-            options: ["China", "Estados Unidos", "Canadá", "Rússia"],
-            correct: 3,
-            explanation: "A Rússia é o maior país do mundo com mais de 17 milhões de km²."
-        },
-        {
-            question: "Em qual continente fica o Egito?",
-            options: ["Ásia", "África", "Europa", "Oceania"],
-            correct: 1,
-            explanation: "O Egito está localizado no continente africano."
-        },
-        {
-            question: "Qual é o rio mais longo do mundo?",
-            options: ["Amazonas", "Nilo", "Mississippi", "Yangtzé"],
-            correct: 1,
-            explanation: "O Rio Nilo, com cerca de 6.650 km, é considerado o mais longo do mundo."
-        },
-        {
-            question: "Quantos continentes existem?",
-            options: ["5", "6", "7", "8"],
-            correct: 2,
-            explanation: "Existem 7 continentes: África, Antártida, Ásia, Europa, América do Norte, América do Sul e Oceania."
-        },
-        {
-            question: "Qual é a capital da França?",
-            options: ["Londres", "Madrid", "Paris", "Roma"],
-            correct: 2,
-            explanation: "Paris é a capital da França."
-        },
-        {
-            question: "Qual é a montanha mais alta do mundo?",
-            options: ["K2", "Monte Everest", "Kilimanjaro", "Mont Blanc"],
-            correct: 1,
-            explanation: "O Monte Everest, com 8.848 metros, é a montanha mais alta do mundo."
-        },
-        {
-            question: "Em qual oceano fica a Ilha de Madagascar?",
-            options: ["Atlântico", "Pacífico", "Índico", "Ártico"],
-            correct: 2,
-            explanation: "Madagascar está localizada no Oceano Índico, próxima à costa da África."
-        },
-        {
-            question: "Qual país tem a maior população do mundo?",
-            options: ["Índia", "China", "Estados Unidos", "Indonésia"],
-            correct: 1,
-            explanation: "A China tem a maior população do mundo, com mais de 1,4 bilhão de habitantes."
-        },
-        {
-            question: "Qual é o menor país do mundo?",
-            options: ["Mônaco", "Vaticano", "San Marino", "Liechtenstein"],
-            correct: 1,
-            explanation: "O Vaticano é o menor país do mundo, com apenas 0,44 km²."
-        }
-    ],
-    historia: [
-        {
-            question: "Em que ano o Brasil foi descoberto pelos portugueses?",
-            options: ["1498", "1500", "1502", "1504"],
-            correct: 1,
-            explanation: "O Brasil foi descoberto por Pedro Álvares Cabral em 22 de abril de 1500."
-        },
-        {
-            question: "Quem foi o primeiro presidente do Brasil?",
-            options: ["Getúlio Vargas", "Deodoro da Fonseca", "Floriano Peixoto", "Prudente de Morais"],
-            correct: 1,
-            explanation: "Deodoro da Fonseca foi o primeiro presidente do Brasil (1889-1891)."
-        },
-        {
-            question: "Em que ano começou a Segunda Guerra Mundial?",
-            options: ["1937", "1938", "1939", "1940"],
-            correct: 2,
-            explanation: "A Segunda Guerra Mundial começou em 1939 com a invasão da Polônia pela Alemanha."
-        },
-        {
-            question: "Qual civilização construiu as pirâmides de Gizé?",
-            options: ["Romana", "Grega", "Egípcia", "Mesopotâmica"],
-            correct: 2,
-            explanation: "As pirâmides de Gizé foram construídas pelos antigos egípcios."
-        },
-        {
-            question: "Em que ano foi proclamada a Independência do Brasil?",
-            options: ["1820", "1821", "1822", "1823"],
-            correct: 2,
-            explanation: "A Independência do Brasil foi proclamada em 7 de setembro de 1822."
-        },
-        {
-            question: "Quem foi Napoleão Bonaparte?",
-            options: ["Rei da França", "Imperador da França", "Presidente da França", "Duque da França"],
-            correct: 1,
-            explanation: "Napoleão Bonaparte foi Imperador da França de 1804 a 1814."
-        },
-        {
-            question: "Em que século ocorreu o Renascimento?",
-            options: ["Século XIII", "Século XIV", "Século XV", "Século XVI"],
-            correct: 2,
-            explanation: "O Renascimento ocorreu principalmente nos séculos XV e XVI."
-        },
-        {
-            question: "Qual foi a primeira capital do Brasil?",
-            options: ["Rio de Janeiro", "São Paulo", "Salvador", "Brasília"],
-            correct: 2,
-            explanation: "Salvador foi a primeira capital do Brasil, de 1549 a 1763."
-        },
-        {
-            question: "Em que ano caiu o Muro de Berlim?",
-            options: ["1987", "1988", "1989", "1990"],
-            correct: 2,
-            explanation: "O Muro de Berlim caiu em 9 de novembro de 1989."
-        },
-        {
-            question: "Quem descobriu o Brasil?",
-            options: ["Vasco da Gama", "Pedro Álvares Cabral", "Cristóvão Colombo", "Fernão de Magalhães"],
-            correct: 1,
-            explanation: "Pedro Álvares Cabral descobriu o Brasil em 1500."
-        }
-    ]
-};
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Educativo - Matemática, Geografia e História</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Página Inicial -->
+        <div id="home-page" class="page active">
+            <header class="header">
+                <h1 class="main-title">Quiz Educativo</h1>
+                <p class="subtitle">
+                    Teste seus conhecimentos em matemática, geografia e história. 
+                    Escolha uma matéria e comece a desafiar seu cérebro!
+                </p>
+            </header>
 
-// Nomes das matérias
-const subjectNames = {
-    matematica: "Matemática",
-    geografia: "Geografia",
-    historia: "História"
-};
+            <div class="subjects-grid">
+                <div class="subject-card" data-subject="matematica">
+                    <div class="subject-icon math">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <h2>Matemática</h2>
+                    <p>Desafie-se com problemas de álgebra, geometria e aritmética</p>
+                    <button class="start-btn math-btn">Começar Quiz</button>
+                </div>
 
-// Estado do jogo
-let currentSubject = '';
-let currentQuestionIndex = 0;
-let score = 0;
-let selectedAnswer = null;
-let questions = [];
+                <div class="subject-card" data-subject="geografia">
+                    <div class="subject-icon geo">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h2>Geografia</h2>
+                    <p>Explore países, capitais, rios e características do nosso planeta</p>
+                    <button class="start-btn geo-btn">Começar Quiz</button>
+                </div>
 
-// Elementos DOM
-const homePage = document.getElementById('home-page');
-const quizPage = document.getElementById('quiz-page');
-const resultPage = document.getElementById('result-page');
+                <div class="subject-card" data-subject="historia">
+                    <div class="subject-icon hist">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h2>História</h2>
+                    <p>Viaje no tempo e teste seus conhecimentos sobre eventos históricos</p>
+                    <button class="start-btn hist-btn">Começar Quiz</button>
+                </div>
+            </div>
 
-// Inicialização
-document.addEventListener('DOMContentLoaded', function() {
-    initializeEventListeners();
-});
+            <div class="how-it-works">
+                <h2>Como Funciona</h2>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h3>Escolha</h3>
+                        <p>Selecione uma das três matérias disponíveis</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h3>Responda</h3>
+                        <p>Responda 10 perguntas de múltipla escolha</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h3>Resultado</h3>
+                        <p>Veja sua pontuação e aprenda com os erros</p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-function initializeEventListeners() {
-    // Botões de iniciar quiz
-    document.querySelectorAll('.subject-card').forEach(card => {
-        card.addEventListener('click', function() {
-            const subject = this.dataset.subject;
-            startQuiz(subject);
-        });
-    });
+        <!-- Página do Quiz -->
+        <div id="quiz-page" class="page">
+            <div class="quiz-header">
+                <div class="quiz-info">
+                    <h1 id="quiz-title">Quiz de Matemática</h1>
+                    <button id="home-btn" class="home-btn">
+                        <i class="fas fa-home"></i> Início
+                    </button>
+                </div>
+                <div class="progress-info">
+                    <span id="question-counter">Pergunta 1 de 10</span>
+                    <span id="score-display">Pontuação: 0/0</span>
+                </div>
+                <div class="progress-bar">
+                    <div id="progress-fill" class="progress-fill"></div>
+                </div>
+            </div>
 
-    // Botões de navegação
-    document.getElementById('home-btn').addEventListener('click', goHome);
-    document.getElementById('home-result-btn').addEventListener('click', goHome);
-    document.getElementById('retry-btn').addEventListener('click', retryQuiz);
-    document.getElementById('next-btn').addEventListener('click', nextQuestion);
-}
+            <div class="quiz-content">
+                <div class="question-card">
+                    <h2 id="question-text">Carregando pergunta...</h2>
+                    <div id="options-container" class="options-container">
+                        <!-- Opções serão inseridas aqui pelo JavaScript -->
+                    </div>
+                </div>
 
-function startQuiz(subject) {
-    currentSubject = subject;
-    questions = [...questionsData[subject]];
-    currentQuestionIndex = 0;
-    score = 0;
-    selectedAnswer = null;
+                <div id="explanation-card" class="explanation-card hidden">
+                    <div class="explanation-content">
+                        <div class="explanation-icon">
+                            <i id="result-icon" class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="explanation-text">
+                            <h3 id="result-title">Correto!</h3>
+                            <p id="explanation-text">Explicação da resposta...</p>
+                        </div>
+                    </div>
+                </div>
 
-    // Atualizar título do quiz
-    document.getElementById('quiz-title').textContent = `Quiz de ${subjectNames[subject]}`;
-    
-    // Mostrar página do quiz
-    showPage('quiz');
-    
-    // Carregar primeira pergunta
-    loadQuestion();
-}
+                <div class="quiz-actions">
+                    <button id="next-btn" class="next-btn" disabled>Próxima Pergunta</button>
+                </div>
+            </div>
+        </div>
 
-function loadQuestion() {
-    const question = questions[currentQuestionIndex];
-    
-    // Atualizar informações do progresso
-    document.getElementById('question-counter').textContent = 
-        `Pergunta ${currentQuestionIndex + 1} de ${questions.length}`;
-    document.getElementById('score-display').textContent = 
-        `Pontuação: ${score}/${currentQuestionIndex}`;
-    
-    // Atualizar barra de progresso
-    const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
-    document.getElementById('progress-fill').style.width = `${progress}%`;
-    
-    // Carregar pergunta
-    document.getElementById('question-text').textContent = question.question;
-    
-    // Carregar opções
-    const optionsContainer = document.getElementById('options-container');
-    optionsContainer.innerHTML = '';
-    
-    question.options.forEach((option, index) => {
-        const optionElement = document.createElement('div');
-        optionElement.className = 'option';
-        optionElement.textContent = option;
-        optionElement.addEventListener('click', () => selectAnswer(index));
-        optionsContainer.appendChild(optionElement);
-    });
-    
-    // Resetar estado
-    selectedAnswer = null;
-    document.getElementById('next-btn').disabled = true;
-    document.getElementById('explanation-card').classList.add('hidden');
-}
+        <!-- Página de Resultado -->
+        <div id="result-page" class="page">
+            <div class="result-content">
+                <div class="result-icon">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <h1>Quiz Concluído!</h1>
+                <div class="score-display">
+                    <div class="final-score">
+                        <span id="final-score">0/10</span>
+                    </div>
+                    <div class="percentage">
+                        <span id="percentage">0% de acertos</span>
+                    </div>
+                </div>
+                <div class="score-message">
+                    <p id="score-message">Mensagem de resultado...</p>
+                </div>
+                <div class="result-actions">
+                    <button id="retry-btn" class="retry-btn">
+                        <i class="fas fa-redo"></i> Tentar Novamente
+                    </button>
+                    <button id="home-result-btn" class="home-btn">
+                        <i class="fas fa-home"></i> Voltar ao Início
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-function selectAnswer(answerIndex) {
-    if (selectedAnswer !== null) return; // Já respondeu
-    
-    selectedAnswer = answerIndex;
-    const options = document.querySelectorAll('.option');
-    const question = questions[currentQuestionIndex];
-    
-    // Marcar todas as opções como desabilitadas
-    options.forEach(option => option.classList.add('disabled'));
-    
-    // Marcar resposta selecionada
-    options[answerIndex].classList.add('selected');
-    
-    // Mostrar resposta correta
-    options[question.correct].classList.add('correct');
-    
-    // Se errou, marcar como incorreta
-    if (answerIndex !== question.correct) {
-        options[answerIndex].classList.add('incorrect');
-    }
-    
-    // Mostrar explicação
-    showExplanation(answerIndex === question.correct);
-    
-    // Habilitar botão próxima
-    document.getElementById('next-btn').disabled = false;
-}
-
-function showExplanation(isCorrect) {
-    const explanationCard = document.getElementById('explanation-card');
-    const resultIcon = document.getElementById('result-icon');
-    const resultTitle = document.getElementById('result-title');
-    const explanationText = document.getElementById('explanation-text');
-    const question = questions[currentQuestionIndex];
-    
-    // Configurar ícone e título
-    if (isCorrect) {
-        resultIcon.className = 'fas fa-check-circle';
-        resultIcon.parentElement.classList.remove('incorrect');
-        resultTitle.textContent = 'Correto!';
-        score++;
-    } else {
-        resultIcon.className = 'fas fa-times-circle';
-        resultIcon.parentElement.classList.add('incorrect');
-        resultTitle.textContent = 'Incorreto!';
-    }
-    
-    // Mostrar explicação
-    explanationText.textContent = question.explanation;
-    explanationCard.classList.remove('hidden');
-}
-
-function nextQuestion() {
-    if (currentQuestionIndex < questions.length - 1) {
-        currentQuestionIndex++;
-        loadQuestion();
-    } else {
-        showResults();
-    }
-}
-
-function showResults() {
-    const finalScore = document.getElementById('final-score');
-    const percentage = document.getElementById('percentage');
-    const scoreMessage = document.getElementById('score-message');
-    
-    // Calcular porcentagem
-    const percentValue = Math.round((score / questions.length) * 100);
-    
-    // Atualizar elementos
-    finalScore.textContent = `${score}/${questions.length}`;
-    percentage.textContent = `${percentValue}% de acertos`;
-    
-    // Mensagem baseada na performance
-    let message = '';
-    if (percentValue >= 80) {
-        message = 'Excelente! Você domina o assunto!';
-    } else if (percentValue >= 60) {
-        message = 'Muito bem! Bom conhecimento!';
-    } else if (percentValue >= 40) {
-        message = 'Razoável. Continue estudando!';
-    } else {
-        message = 'Precisa estudar mais. Não desista!';
-    }
-    
-    scoreMessage.textContent = message;
-    
-    // Mostrar página de resultado
-    showPage('result');
-}
-
-function retryQuiz() {
-    startQuiz(currentSubject);
-}
-
-function goHome() {
-    showPage('home');
-}
-
-function showPage(pageId) {
-    // Esconder todas as páginas
-    document.querySelectorAll('.page').forEach(page => {
-        page.classList.remove('active');
-    });
-    
-    // Mostrar página específica
-    if (pageId === 'home') {
-        homePage.classList.add('active');
-    } else if (pageId === 'quiz') {
-        quizPage.classList.add('active');
-    } else if (pageId === 'result') {
-        resultPage.classList.add('active');
-    }
-}
+    <script src="script.js"></script>
+</body>
+</html>
